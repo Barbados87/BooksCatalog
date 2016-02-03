@@ -19,6 +19,7 @@ namespace BooksCatalog.DAL
         public DbSet<Author> Authors { get; set; }
 
         public DbSet<Genre> Genres { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

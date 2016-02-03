@@ -1,1 +1,17 @@
-﻿
+﻿@model IEnumerable<BooksCatalog.Models.Book>
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Author</td>
+        <td>Genre</td>
+    </tr>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(i => book.Name)</td>
+            <td>@Html.DisplayFor(i => book.Author.FirstName)</td>
+            <td>@Html.DisplayFor(i => book.Genre.Name)</td>
+        </tr>
+    }
+</table>
