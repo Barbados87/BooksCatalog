@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Web.Mvc;
 using BooksCatalog.DAL;
 
 namespace BooksCatalog.Controllers
@@ -9,7 +10,7 @@ namespace BooksCatalog.Controllers
 
         public ActionResult Index()
         {
-            return View(_dbContext.Books);
+            return View(_dbContext.Books.Include(b => b.Author).Include(b => b.Genre));
         }
 
         public ActionResult Details(int? id)

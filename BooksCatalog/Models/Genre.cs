@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BooksCatalog.Models
 {
@@ -7,5 +8,11 @@ namespace BooksCatalog.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public string Name { get; set; }
+        public ICollection<Book> Books { get; set; }
+ 
+        public Genre()
+        {
+            Books = new HashSet<Book>();    
+        }
     }
 }

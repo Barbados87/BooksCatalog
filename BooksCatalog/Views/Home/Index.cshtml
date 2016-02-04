@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<BooksCatalog.Models.Book>
 
+<h1></h1>
+
 <table>
     <tr>
         <td>Name</td>
@@ -10,7 +12,7 @@
     {
         <tr>
             <td>@Html.DisplayFor(i => book.Name)</td>
-            <td>@Html.DisplayFor(i => book.Author.FirstName)</td>
+            <td>@Html.DisplayFor(i => book.Author.FullName)</td>
             <td>@Html.DisplayFor(i => book.Genre.Name)</td>
         </tr>
     }
