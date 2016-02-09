@@ -1,6 +1,8 @@
 ﻿using System.Data.Entity;
+using System.Net;
 using System.Web.Mvc;
 using BooksCatalog.DAL;
+using BooksCatalog.Models;
 
 namespace BooksCatalog.Controllers
 {
@@ -15,7 +17,18 @@ namespace BooksCatalog.Controllers
 
         public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Book book = _dbContext.Books.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(book);
         }
     }
 }
