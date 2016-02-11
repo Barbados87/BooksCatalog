@@ -2,24 +2,23 @@
 
 <h1></h1>
 
-<table>
-    <tr>
-        <td>Name</td>
-        <td>Author</td>
-        <td>Genre</td>
-    </tr>
-    @foreach (var book in Model)
-    {
+<div ng-app="booksCatalogApp">
+    <div ng-controller="BookListCtrl">
+        {{title}}
+    </div>
+    <table>
         <tr>
-            <td>@Html.DisplayFor(i => book.Name)</td>
-            <td>@Html.DisplayFor(i => book.Author.FullName)</td>
-            <td>@Html.DisplayFor(i => book.Genre.Name)</td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = book.Id })
-            </td>
+            <td>Name</td>
+            <td>Author</td>
+            <td>Genre</td>
         </tr>
-    }
-</table>
+        <tr ng-repeat="book in books">
+            <td>{{book.name}}</td>
+            <td>{{book.author.firstName}}</td>
+            <td>{{book.genre.name}}</td>
+        </tr>
+    </table>
+</div>
 
 <div>
     <span>Add new book</span>
@@ -44,3 +43,7 @@
         </tr>
     </table>
 </div>
+
+@Scripts.Render("~/Scripts/angular.js")
+@Scripts.Render("~/Scripts/app/app.js")
+@Scripts.Render("~/Scripts/app/controllers/controllers.js")
