@@ -13,37 +13,35 @@
             </tr>
             <tr ng-repeat="book in books.$values">
                 <td>{{book.name}}</td>
-                <td>{{book.author.firstName}}</td>
+                <td>{{book.author.fullName}}</td>
                 <td>{{book.genre.name}}</td>
             </tr>
         </table>
     </div>
+    <div style="margin-top: 20px" ng-controller="BookCreateCtrl">
+        <span>Add new book</span>
+        <table>
+            <tr>
+                <td>Author</td>
+                <td>
+                    <select ng-model="newBook.authorId" ng-options="author.id as author.fullName for author in authors.$values"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Genre</td>
+                <td>
+                    <select ng-model="newBook.genreId" ng-options="genre.id as genre.name for genre in genres.$values"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" name="name" ng-model="newBook.name" />
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
-
-@*<div>
-    <span>Add new book</span>
-    <table>
-        <tr>
-            <td>Author</td>
-            <td>
-                <select name=""></select>
-            </td>
-        </tr>
-        <tr>
-            <td>Genre</td>
-            <td>
-                <select name=""></select>
-            </td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>
-                <input/>
-            </td>
-        </tr>
-    </table>
-</div>*@
-
 @Scripts.Render("~/Scripts/angular.js")
 @Scripts.Render("~/Scripts/app/app.js")
 @Scripts.Render("~/Scripts/app/controllers/controllers.js")

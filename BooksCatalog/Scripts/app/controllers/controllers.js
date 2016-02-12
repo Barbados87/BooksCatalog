@@ -10,3 +10,19 @@ booksController.controller('BookListCtrl', ['$scope', '$http',
         });
     }
 ]);
+
+booksController.controller('BookCreateCtrl', ['$scope', '$http',
+    function($scope, $http) {
+        $http.get("/bookscatalog/api/authors").success(function (data) {
+            $scope.authors = data;
+        });
+
+        $http.get("/bookscatalog/api/genres").success(function (data) {
+            $scope.genres = data;
+        });
+
+        $scope.save = function() {
+            
+        }
+    }
+]);
