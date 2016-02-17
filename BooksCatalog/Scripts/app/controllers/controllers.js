@@ -21,8 +21,8 @@ booksController.controller('BookCreateCtrl', ['$scope', '$http',
             $scope.genres = data;
         });
 
-        $scope.save = function() {
-            
-        }
+        $scope.save = function(newBook) {
+            $http.post("/bookscatalog/api/books", {"name": newBook.name, "authorId": newBook.authorId, "genreId": newBook.genreId});
+        };
     }
 ]);

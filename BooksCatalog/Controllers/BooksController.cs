@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BooksCatalog.DAL;
 using BooksCatalog.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace BooksCatalog.Controllers
 {
@@ -21,6 +22,19 @@ namespace BooksCatalog.Controllers
             return Ok(books);
         }
 
+        [ResponseType(typeof(Book))]
+        public async Task<IHttpActionResult> Post(Book book)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isCorrect = await SaveAsync(book);
+
+            return Ok(isCorrect);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -29,6 +43,14 @@ namespace BooksCatalog.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        private async Task<bool> SaveAsync(Book book)
+        {
+            _dbContext.Books.Add(book);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         private async Task<List<Book>> GetBooks()

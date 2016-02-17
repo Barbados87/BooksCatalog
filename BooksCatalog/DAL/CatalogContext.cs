@@ -12,6 +12,7 @@ namespace BooksCatalog.DAL
     {
         public CatalogContext() : base("CatalogContext")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Book> Books { get; set; }

@@ -13,8 +13,8 @@ namespace BooksCatalog.Models
         
         public int GenreId { get; set; }
         
-        public Author Author { get; set; }
+        public virtual Author Author { get; set; }
         
-        public Genre Genre { get; set; }
+        public virtual Genre Genre { get; set; }
     }
 }
