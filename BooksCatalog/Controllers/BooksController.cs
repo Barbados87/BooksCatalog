@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BooksCatalog.DAL;
 using BooksCatalog.Models;
 using System.Data.Entity.Infrastructure;
+using BooksCatalog.ViewModels;
 
 namespace BooksCatalog.Controllers
 {
@@ -14,7 +16,7 @@ namespace BooksCatalog.Controllers
     {
         private CatalogContext _dbContext = new CatalogContext();
 
-        [ResponseType(typeof(List<Book>))]
+        [ResponseType(typeof(IEnumerable<BookModel>))]
         public async Task<IHttpActionResult> Get()
         {
             var books = await GetBooks();
@@ -53,9 +55,14 @@ namespace BooksCatalog.Controllers
             return true;
         }
 
-        private async Task<List<Book>> GetBooks()
+        private async Task<IEnumerable<BookModel>> GetBooks()
         {
-            return await _dbContext.Books.Include(b => b.Author).Include(b => b.Genre).ToListAsync();
+            var books = await _dbContext.Books
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .ToListAsync();
+            
+            return books.Select(b => new BookModel(b));
         }
     }
 }

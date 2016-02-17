@@ -22,7 +22,11 @@ booksController.controller('BookCreateCtrl', ['$scope', '$http',
         });
 
         $scope.save = function(newBook) {
-            $http.post("/bookscatalog/api/books", {"name": newBook.name, "authorId": newBook.authorId, "genreId": newBook.genreId});
+            $http.post("/bookscatalog/api/books",
+                { "name": newBook.name, "authorId": newBook.authorId, "genreId": newBook.genreId })
+                .success(function(data) {
+                    newBook = [];
+            });
         };
     }
 ]);
