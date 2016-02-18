@@ -1,22 +1,14 @@
 ﻿var booksController = new angular.module('booksController', []);
 
-booksController.controller('BookListCtrl', ['$scope', '$http',
-    function ($scope, $http) {
+booksController.controller('BookListCtrl', ['$scope', '$http', 'crudService',
+    function ($scope, $http, crudService) {
         $scope.title = "Prived Medved";
 
         $scope.loadBooks = function() {
-            $http.get("/bookscatalog/api/books").success(function(data) {
-                $scope.books = data;
-            }).error(function(data) {
-                $scope.title = "Something went wrong...";
-            });
-        }
+            $scope.books = crudService.loadBooks();
+        };
         $scope.loadBooks();
-/*    }
-]);
 
-booksController.controller('BookCreateCtrl', ['$scope', '$http',
-    function($scope, $http) {*/
         $http.get("/bookscatalog/api/authors").success(function (data) {
             $scope.authors = data;
         });
@@ -25,13 +17,10 @@ booksController.controller('BookCreateCtrl', ['$scope', '$http',
             $scope.genres = data;
         });
 
-        $scope.save = function(newBook) {
-            $http.post("/bookscatalog/api/books",
-                { "name": newBook.name, "authorId": newBook.authorId, "genreId": newBook.genreId })
-                .success(function(data) {
-                    newBook.name = "";
-                    $scope.loadBooks();
-                });
+        $scope.save = function() {
+            crudService.saveBook($scope.newBook);
+            $scope.newBook = {};
+            $scope.loadBooks();
         };
     }
 ]);
