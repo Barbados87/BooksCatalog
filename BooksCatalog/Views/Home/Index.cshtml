@@ -4,21 +4,22 @@
 
 <div ng-app="booksCatalogApp">
     <div ng-controller="BookListCtrl">
-        {{title}}
-        <table>
+        <div style="margin: 0 0 0 20px">
+            <span>Search: </span>
+            <input type="text" name="search" ng-model="query"/>
+        </div>
+        <table style="width: 100%">
             <tr>
                 <td>Name</td>
                 <td>Author</td>
                 <td>Genre</td>
             </tr>
-            <tr ng-repeat="book in books.$values">
+            <tr ng-repeat="book in books.$values | filter: query | orderBy: name">
                 <td>{{book.name}}</td>
                 <td>{{book.author.firstName}} {{book.author.lastName}}</td>
                 <td>{{book.genre.name}}</td>
             </tr>
         </table>
-    @*</div>
-    <div style="margin-top: 20px" ng-controller="BookCreateCtrl">*@
         <span>Add new book</span>
         <table>
             <tr>
@@ -55,5 +56,6 @@
 </div>
 @Scripts.Render("~/Scripts/angular.js")
 @Scripts.Render("~/Scripts/app/app.js")
+@Scripts.Render("~/Scripts/app/filters.js")
 @Scripts.Render("~/Scripts/app/controllers/controllers.js")
 @Scripts.Render("~/Scripts/app/services/services.js")

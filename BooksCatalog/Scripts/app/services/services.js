@@ -3,13 +3,22 @@
 booksServices.factory('crudService', ['$http', function ($http) {
     var factory = {};
 
-    factory.loadBooks = function () {
-        factory.books = [];
-        $http.get("/bookscatalog/api/books").success(function(data) {
-            factory.books = data;
+    factory.getBooks = function (callback) {
+        $http.get("/bookscatalog/api/books").then(function(response) {
+            callback(response.data);
         });
+    };
 
-        return factory.books;
+    factory.getAuthors = function (callback) {
+        $http.get("/bookscatalog/api/authors").then(function(response) {
+            callback(response.data);
+        });
+    };
+
+    factory.getGenres = function (callback) {
+        $http.get("/bookscatalog/api/genres").then(function(response) {
+            callback(response.data);
+        });
     };
 
     factory.saveBook = function (book) {
