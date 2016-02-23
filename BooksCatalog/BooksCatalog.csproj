@@ -195,6 +195,8 @@
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\controllers\controllers.js" />
     <Content Include="Scripts\app\filters.js" />
+    <Content Include="Scripts\app\partials\BookEdit.html" />
+    <Content Include="Scripts\app\partials\BooksList.html" />
     <Content Include="Scripts\app\services\services.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />

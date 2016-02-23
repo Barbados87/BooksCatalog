@@ -1,12 +1,15 @@
 ﻿var booksController = new angular.module('booksController', []);
 
 booksController.controller('BookListCtrl', ['$scope', '$http', 'crudService',
-    function ($scope, $http, crudService) {
-
-        crudService.getBooks(function (data) {
+    function($scope, $http, crudService) {
+        crudService.getBooks(function(data) {
             $scope.books = data;
         });
+    }
+]);
 
+booksController.controller('BookEditCtrl', ['$scope', '$http', 'crudService',
+    function($scope, $http, crudService) {
         crudService.getAuthors(function (data) {
             $scope.authors = data;
         });
