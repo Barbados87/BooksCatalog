@@ -1,6 +1,6 @@
 ﻿var booksServices = angular.module('booksServices', []);
 
-booksServices.factory('crudService', ['$http', function ($http) {
+booksServices.factory('crudService', ['$http', '$location', function ($http, $location) {
     var factory = {};
 
     factory.getBooks = function (callback) {
@@ -27,6 +27,8 @@ booksServices.factory('crudService', ['$http', function ($http) {
             "name": book.name,
             "authorId": book.authorId,
             "genreId": book.genreId
+        }).then(function () {
+            $location.path('BooksCatalog/Scripts/app/partials/BooksList.html');
         });
     };
 
